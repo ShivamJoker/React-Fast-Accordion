@@ -1,0 +1,30 @@
+body {
+  display: flex;
+  flex-direction: column;
+  /* align-items: center; */
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
+    "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+li .header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 10px 0;
+  font-size: 1.2em;
+  cursor: pointer;
+}
+
+ul {
+  max-width: 300px;
+}
+
+.acc-item {
+  border: 2px solid #cccccc;
+  border-radius: 5px;
+  margin-bottom: 10px;
+  padding: 5px 10px;
+}
