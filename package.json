@@ -2,7 +2,7 @@
   "name": "react-fast-accordion",
   "private": false,
   "repository": "github:ShivamJoker/React-fast-accordion",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": "./dist/index.js",
   "module": "./src/index.tsx",
   "files": [
