@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { faker } from "@faker-js/faker";
 import "./app.css";
 import Accordion from "../src";
@@ -11,21 +11,25 @@ const data = Array.from({ length: 200 }, () => {
   };
 });
 
-const HeaderComp = ({ title, isOpen }: { isOpen: boolean }) => (
+type CompProps = typeof data[0] & {
+  isOpen: boolean;
+};
+
+const HeaderComp = ({ title, isOpen }: CompProps) => (
   <div className="header">
-    {title} <span className={`${isOpen}`}>▾</span>
+    {title} <span className={(isOpen ? "open" : "") + " chevron"}>👇</span>
   </div>
 );
 
-const ContentComp = ({ content }) => <p>{content}</p>;
+const ContentComp = ({ content }: CompProps) => <p>{content}</p>;
 
 const App = () => {
   return (
     <div>
       <Accordion
         items={data}
-        HeaderComponent={HeaderComp}
-        ContentComponent={ContentComp}
+        SummaryComponent={HeaderComp}
+        DetailComponent={ContentComp}
       />
     </div>
   );

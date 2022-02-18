@@ -18,6 +18,13 @@ li .header {
   cursor: pointer;
 }
 
+.chevron {
+  transition: transform 100ms ease-in-out;
+}
+.chevron.open {
+  transform: rotate(180deg);
+}
+
 ul {
   max-width: 300px;
 }

@@ -1,7 +1,7 @@
 .acc-item {
   list-style: none;
 }
-.acc-item > * {
+.acc-item:first-child > * {
   pointer-events: none;
 }
 
@@ -9,7 +9,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin: 10px 0;
+  /* margin: 10px 0; */
   font-size: 1.2em;
   cursor: pointer;
 }

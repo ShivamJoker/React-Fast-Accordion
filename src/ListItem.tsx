@@ -1,8 +1,8 @@
 import React from "react";
 
 interface ListItemProps {
-  HeaderComponent: React.ElementType;
-  ContentComponent: React.ElementType;
+  SummaryComponent: React.ElementType;
+  DetailComponent: React.ElementType;
   id: string | number;
   isOpen: boolean;
 }
@@ -10,16 +10,16 @@ interface ListItemProps {
 const ListItem = ({
   id,
   isOpen,
-  HeaderComponent,
-  ContentComponent,
+  SummaryComponent,
+  DetailComponent,
   ...rest
 }: ListItemProps) => {
   return (
     <li id={id + ""} className="acc-item">
-      <HeaderComponent {...rest} />
+      <SummaryComponent {...rest} isOpen={isOpen} />
       {isOpen && (
         <div className="acc-content" id={`acc-item-${id}`}>
-          <ContentComponent {...rest} isOpen={isOpen} />
+          <DetailComponent {...rest} isOpen={isOpen} />
         </div>
       )}
     </li>

@@ -8,14 +8,19 @@ interface AccordionItem {
 }
 interface AccorionProps {
   items: AccordionItem[];
-  HeaderComponent: React.ElementType;
-  ContentComponent: React.ElementType;
+  SummaryComponent: React.ElementType;
+  DetailComponent: React.ElementType;
 }
 const Accordion = ({ items, ...rest }: AccorionProps) => {
   const [opened, setOpened] = useState<Record<string, boolean>>({});
 
   const clickHandler = (e: MouseEvent): void => {
-    const element = e.target as HTMLElement;
+    let element = e.target as HTMLElement;
+
+    if (element.parentElement?.tagName === "LI") {
+      element = element.parentElement;
+    }
+
     if (element.tagName !== "LI") return;
 
     const id = element.getAttribute("id");
@@ -58,7 +63,7 @@ const Accordion = ({ items, ...rest }: AccorionProps) => {
   return (
     <ul onClick={clickHandler}>
       {items.map(({ id, ...data }) => (
-        <ListItem id={id} {...data} isOpen={opened[id]} {...rest} />
+        <ListItem id={id} {...data} key={id} isOpen={opened[id]} {...rest} />
       ))}
     </ul>
   );
