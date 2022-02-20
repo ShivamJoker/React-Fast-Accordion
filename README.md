@@ -2,6 +2,10 @@
 
 Dynamic, fast & zero dependency accordions for React
 
+## Demo
+
+![Screen recording demo](https://user-images.githubusercontent.com/23727670/154848343-352c6833-192c-46de-b0d5-b986ba4ef53a.gif)
+
 ## Installation
 
 Install with npm
