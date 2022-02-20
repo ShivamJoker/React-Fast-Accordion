@@ -1,9 +1,11 @@
 {
   "name": "react-fast-accordion",
+  "description": "High performance 0 dependencies accordion for React",
+  "author": "Shivam <hi@creativeshi.com>",
   "private": false,
   "repository": "github:ShivamJoker/React-fast-accordion",
   "version": "1.0.6",
-  "licence": "GPL",
+  "licence": "GPL-3.0",
   "main": "./dist/index.js",
   "module": "./src/index.tsx",
   "files": [
