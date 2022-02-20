@@ -1,9 +1,9 @@
-import React, { FC, MouseEvent, useState } from "react";
+import React, { MouseEvent, useState } from "react";
 import ListItem from "./ListItem";
 import "./style.css";
 
 interface AccordionItem {
-  [name: string]: unknown;
+  [name: string]: any;
   id: string | number;
 }
 interface AccorionProps {

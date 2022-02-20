@@ -1,16 +1,11 @@
 .acc-item {
   list-style: none;
 }
-.acc-item:first-child > * {
+.acc-item *:first-child > * {
   pointer-events: none;
 }
 
-.acc-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  /* margin: 10px 0; */
-  font-size: 1.2em;
+.acc-item *:first-child {
   cursor: pointer;
 }
 
