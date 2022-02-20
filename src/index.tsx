@@ -3,7 +3,7 @@ import ListItem from "./ListItem";
 import "./style.css";
 
 interface AccordionItem {
-  [name: string]: any;
+  [name: string | number | symbol]: unknown;
   id: string | number;
 }
 interface AccorionProps {

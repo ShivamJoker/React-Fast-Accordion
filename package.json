@@ -3,6 +3,7 @@
   "private": false,
   "repository": "github:ShivamJoker/React-fast-accordion",
   "version": "1.0.6",
+  "licence": "GPL",
   "main": "./dist/index.js",
   "module": "./src/index.tsx",
   "files": [
