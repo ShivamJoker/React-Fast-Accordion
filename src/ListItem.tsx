@@ -15,7 +15,7 @@ const ListItem = ({
   ...rest
 }: ListItemProps) => {
   return (
-    <li id={id + ""} className="acc-item">
+    <li id={id.toString()} className="acc-item">
       <SummaryComponent {...rest} isOpen={isOpen} />
       {isOpen && (
         <div className="acc-content" id={`acc-item-${id}`}>

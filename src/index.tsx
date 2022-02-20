@@ -1,4 +1,4 @@
-import React, { MouseEvent, useState } from "react";
+import React, { MouseEvent, useEffect, useState } from "react";
 import ListItem from "./ListItem";
 import "./style.css";
 
@@ -10,7 +10,11 @@ interface AccorionProps {
   items: AccordionItem[];
   SummaryComponent: React.ElementType;
   DetailComponent: React.ElementType;
+  [rest: string | number | symbol]: unknown;
 }
+
+let interval: number;
+
 const Accordion = ({ items, ...rest }: AccorionProps) => {
   const [opened, setOpened] = useState<Record<string, boolean>>({});
 
@@ -47,18 +51,26 @@ const Accordion = ({ items, ...rest }: AccorionProps) => {
 
     setOpened((prv) => ({ ...prv, [id]: true }));
 
-    setTimeout(() => {
+    // listen for DOM to be added
+    interval = setInterval(() => {
       const contentItem = document.getElementById(`acc-item-${id}`);
-
       if (!contentItem) return;
-      const scrollHeight = contentItem.scrollHeight;
+      if (contentItem?.scrollHeight) {
+        const scrollHeight = contentItem.scrollHeight;
 
-      contentItem.animate(
-        { maxHeight: `${scrollHeight}px`, opacity: 1 },
-        { duration: 100, easing: "ease-in", fill: "forwards" }
-      );
-    }, 0);
+        contentItem.animate(
+          { maxHeight: `${scrollHeight}px`, opacity: 1 },
+          { duration: 100, easing: "ease-in", fill: "forwards" }
+        );
+        clearInterval(interval);
+      }
+    }, 5);
   };
+
+  useEffect(() => {
+    // remove on unmount
+    return clearInterval(interval);
+  }, []);
 
   return (
     <ul onClick={clickHandler}>
