@@ -1,11 +1,12 @@
 .acc-item {
   list-style: none;
 }
-.acc-item *:first-child > * {
+
+.acc-item > div:first-of-type > * {
   pointer-events: none;
 }
 
-.acc-item *:first-child {
+.acc-item > div:first-of-type {
   cursor: pointer;
 }
 
