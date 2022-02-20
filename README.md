@@ -2,9 +2,14 @@
 
 Dynamic, fast & zero dependency accordions for React
 
+[![Npm version](https://img.shields.io/npm/v/react-fast-accordion?style=flat-square)](https://www.npmjs.com/package/react-fast-accordion)
+![Downloads](https://img.shields.io/npm/dm/react-fast-accordion?style=flat-square)
+
 ## Demo
 
 ![Screen recording demo](https://user-images.githubusercontent.com/23727670/154848343-352c6833-192c-46de-b0d5-b986ba4ef53a.gif)
+
+[![Edit React fast accordion demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/festive-yalow-fm0hkf?fontsize=14&hidenavigation=1&theme=dark&view=preview)
 
 ## Installation
 
