@@ -1,6 +1,6 @@
 # React Fast Accordion ⚡️
 
-Dynamic, fast & zero dependency accordions for React
+Dynamic, fast, accessible & zero dependency accordion for React
 
 [![Npm version](https://img.shields.io/npm/v/react-fast-accordion?style=flat-square)](https://www.npmjs.com/package/react-fast-accordion)
 ![Downloads](https://img.shields.io/npm/dm/react-fast-accordion?style=flat-square)
@@ -8,7 +8,8 @@ Dynamic, fast & zero dependency accordions for React
 ## How it's fast?
 
 - Instead of adding event listener on all the items, it only adds to the container.
-- It uses web animation API (WAPI) instead of classes or style based animation, which is way performant than others.
+- It has zero dependency, the animations are done using web animation API
+- Content component dynamically gets added to the DOM
 
 ## Demo
 
