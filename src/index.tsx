@@ -9,7 +9,7 @@ import ListItem from "./ListItem";
 import "./style.css";
 
 interface AccordionItem {
-  [name: string | number | symbol]: unknown;
+  [name: string | number | symbol]: any;
   id: string | number;
 }
 interface AccorionProps {
