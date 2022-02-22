@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 
 interface ListItemProps {
   SummaryComponent: React.ElementType;
@@ -6,7 +6,6 @@ interface ListItemProps {
   id: string | number;
   isOpen: boolean;
 }
-
 const ListItem = ({
   id,
   isOpen,
@@ -26,4 +25,4 @@ const ListItem = ({
   );
 };
 
-export default ListItem;
+export default memo(ListItem);
