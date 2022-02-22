@@ -1,5 +1,4 @@
-import React, { MouseEvent, useEffect, useState } from "react";
-import ListItem from "./ListItem";
+import React, { MouseEvent, useEffect, useState, useRef } from "react";
 import "./style.css";
 
 interface AccordionItem {
@@ -13,72 +12,66 @@ interface AccorionProps {
   [rest: string | number | symbol]: unknown;
 }
 
-let interval: number;
+interface ListItemProps {
+  SummaryComponent: React.ElementType;
+  DetailComponent: React.ElementType;
+  id: string | number;
+}
 
-const Accordion = ({ items, ...rest }: AccorionProps) => {
-  const [opened, setOpened] = useState<Record<string, boolean>>({});
+const ListItem = ({
+  id,
+  SummaryComponent,
+  DetailComponent,
+  ...rest
+}: ListItemProps) => {
+  const contentItem = useRef<HTMLDivElement>(null);
+  const [opened, setOpened] = useState<boolean>(false);
 
   const clickHandler = (e: MouseEvent): void => {
-    let element = e.target as HTMLElement;
-
-    if (element.parentElement?.tagName === "LI") {
-      element = element.parentElement;
-    }
-
-    if (element.tagName !== "LI") return;
-
-    const id = element.getAttribute("id");
-
-    if (!id) return;
-
-    const isOpen = !!opened[id];
-
-    if (isOpen) {
-      const contentItem = document.getElementById(`acc-item-${id}`);
-
-      if (!contentItem) return;
-
-      contentItem
-        .animate(
-          { maxHeight: 0, opacity: 0 },
-          { duration: 100, easing: "ease-out" }
-        )
-        .finished.then(() => {
-          setOpened((prv) => ({ ...prv, [id]: false }));
-        });
-      return;
-    }
-
-    setOpened((prv) => ({ ...prv, [id]: true }));
-
-    // listen for DOM to be added
-    interval = setInterval(() => {
-      const contentItem = document.getElementById(`acc-item-${id}`);
-      if (!contentItem) return;
-      if (contentItem?.scrollHeight) {
-        const scrollHeight = contentItem.scrollHeight;
-
-        contentItem.animate(
-          { maxHeight: `${scrollHeight}px`, opacity: 1 },
-          { duration: 100, easing: "ease-in", fill: "forwards" }
-        );
-        clearInterval(interval);
+    if (opened && contentItem.current) {
+      const element = e.target as HTMLElement;
+      const clickedInside = contentItem.current.contains(element);
+      if (!clickedInside) {
+        contentItem.current
+          .animate(
+            { maxHeight: 0, opacity: 0 },
+            { duration: 100, easing: "ease-out" }
+          )
+          .finished.then(() => setOpened(false));
       }
-    }, 5);
+    } else {
+      setOpened(true);
+    }
   };
 
   useEffect(() => {
-    // remove on unmount
-    return clearInterval(interval);
-  }, []);
+    if (opened && contentItem && contentItem.current?.scrollHeight) {
+      const scrollHeight = contentItem.current.scrollHeight;
+      contentItem.current.animate(
+        { maxHeight: `${scrollHeight}px`, opacity: 1 },
+        { duration: 100, easing: "ease-in", fill: "forwards" }
+      );
+    }
+  }, [opened]);
 
   return (
-    <ul onClick={clickHandler}>
-      {items.map(({ id, ...data }) => (
-        <ListItem id={id} {...data} key={id} isOpen={opened[id]} {...rest} />
-      ))}
-    </ul>
+    <li onClick={clickHandler} className="acc-item">
+      <SummaryComponent {...rest} isOpen={opened} />
+      {opened && (
+        <div className="acc-content" ref={contentItem}>
+          <DetailComponent {...rest} isOpen={opened} />
+        </div>
+      )}
+    </li>
   );
 };
+
+const Accordion = ({ items, ...rest }: AccorionProps) => (
+  <ul>
+    {items.map(({ id, ...data }) => (
+      <ListItem id={id} {...data} key={id} {...rest} />
+    ))}
+  </ul>
+);
 
 export default Accordion;
