@@ -6,6 +6,8 @@ on:
     paths:
       - "src/**"
       - ".github/**"
+      - "package.json"
+      - "README.md"
 jobs:
   build:
     runs-on: ubuntu-latest
