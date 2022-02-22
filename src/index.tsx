@@ -1,4 +1,4 @@
-import React, { MouseEvent, useEffect, useState } from "react";
+import React, { MouseEvent, useEffect, useRef, useState } from "react";
 import ListItem from "./ListItem";
 import "./style.css";
 
@@ -13,10 +13,32 @@ interface AccorionProps {
   [rest: string | number | symbol]: unknown;
 }
 
-let interval: number;
-
 const Accordion = ({ items, ...rest }: AccorionProps) => {
   const [opened, setOpened] = useState<Record<string, boolean>>({});
+  const listContainerRef = useRef<HTMLUListElement>(null);
+
+  const mutationCb: MutationCallback = (list) => {
+    const contentItem = (list[0].addedNodes[0] as HTMLElement) ?? null;
+
+    if (!contentItem) return;
+    const scrollHeight = contentItem.scrollHeight;
+
+    contentItem.animate(
+      { maxHeight: `${scrollHeight}px`, opacity: 1 },
+      { duration: 100, easing: "ease-in", fill: "forwards" }
+    );
+  };
+
+  const observer = new MutationObserver(mutationCb);
+
+  useEffect(() => {
+    if (!listContainerRef.current) return;
+
+    observer.observe(listContainerRef.current, {
+      childList: true,
+      subtree: true,
+    });
+  }, []);
 
   const clickHandler = (e: MouseEvent): void => {
     let element = e.target as HTMLElement;
@@ -34,7 +56,7 @@ const Accordion = ({ items, ...rest }: AccorionProps) => {
     const isOpen = !!opened[id];
 
     if (isOpen) {
-      const contentItem = document.getElementById(`acc-item-${id}`);
+      const contentItem = document.getElementById(`acc-content-${id}`);
 
       if (!contentItem) return;
 
@@ -50,30 +72,10 @@ const Accordion = ({ items, ...rest }: AccorionProps) => {
     }
 
     setOpened((prv) => ({ ...prv, [id]: true }));
-
-    // listen for DOM to be added
-    interval = setInterval(() => {
-      const contentItem = document.getElementById(`acc-item-${id}`);
-      if (!contentItem) return;
-      if (contentItem?.scrollHeight) {
-        const scrollHeight = contentItem.scrollHeight;
-
-        contentItem.animate(
-          { maxHeight: `${scrollHeight}px`, opacity: 1 },
-          { duration: 100, easing: "ease-in", fill: "forwards" }
-        );
-        clearInterval(interval);
-      }
-    }, 5);
   };
 
-  useEffect(() => {
-    // remove on unmount
-    return clearInterval(interval);
-  }, []);
-
   return (
-    <ul onClick={clickHandler}>
+    <ul onClick={clickHandler} ref={listContainerRef}>
       {items.map(({ id, ...data }) => (
         <ListItem id={id} {...data} key={id} isOpen={opened[id]} {...rest} />
       ))}

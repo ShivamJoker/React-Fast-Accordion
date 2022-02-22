@@ -17,7 +17,7 @@ const ListItem = ({
     <li id={id.toString()} className="acc-item">
       <SummaryComponent {...rest} isOpen={isOpen} />
       {isOpen && (
-        <div className="acc-content" id={`acc-item-${id}`}>
+        <div className="acc-content" id={`acc-content-${id}`}>
           <DetailComponent {...rest} isOpen={isOpen} />
         </div>
       )}
