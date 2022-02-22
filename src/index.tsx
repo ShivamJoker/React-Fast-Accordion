@@ -14,12 +14,13 @@ interface AccordionItem {
 }
 interface AccorionProps {
   items: AccordionItem[];
+  multiExpand?: boolean;
   SummaryComponent: React.ElementType;
   DetailComponent: React.ElementType;
   [rest: string | number | symbol]: unknown;
 }
 
-const Accordion = ({ items, ...rest }: AccorionProps) => {
+const Accordion = ({ items, multiExpand = true, ...rest }: AccorionProps) => {
   const [opened, setOpened] = useState<Record<string, boolean>>({});
   const listContainerRef = useRef<HTMLUListElement>(null);
 
@@ -50,6 +51,27 @@ const Accordion = ({ items, ...rest }: AccorionProps) => {
     });
   }, []);
 
+  const closeAccordion = (id: string) => {
+    const contentItem = document.getElementById(`acc-content-${id}`);
+
+    if (!contentItem) return;
+
+    contentItem
+      .animate(
+        { maxHeight: 0, opacity: 0 },
+        { duration: 100, easing: "ease-out" }
+      )
+      .finished.then(() => {
+        setOpened((prv) => {
+          // make a new copy and delete the id from obj
+          // after animation is finished
+          const newObj = { ...prv };
+          delete newObj[id];
+          return newObj;
+        });
+      });
+  };
+
   const clickHandler = (e: MouseEvent | KeyboardEvent): void => {
     let element = e.target as HTMLElement;
 
@@ -66,22 +88,15 @@ const Accordion = ({ items, ...rest }: AccorionProps) => {
     const isOpen = !!opened[id];
 
     if (isOpen) {
-      const contentItem = document.getElementById(`acc-content-${id}`);
-
-      if (!contentItem) return;
-
-      contentItem
-        .animate(
-          { maxHeight: 0, opacity: 0 },
-          { duration: 100, easing: "ease-out" }
-        )
-        .finished.then(() => {
-          setOpened((prv) => ({ ...prv, [id]: false }));
-        });
-      return;
+      return closeAccordion(id);
     }
 
     setOpened((prv) => ({ ...prv, [id]: true }));
+
+    if (!multiExpand) {
+      const prvAccId = Object.keys(opened)[0];
+      closeAccordion(prvAccId);
+    }
   };
 
   const ariaHandler = (e: KeyboardEvent) => {

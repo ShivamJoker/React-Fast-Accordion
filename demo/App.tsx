@@ -38,6 +38,8 @@ const App = () => {
         // you can pass any props,
         // it will be passed to the Detail & Summary
         onClick={(txt: string) => alert("You clicked on\n" + txt)}
+        // set it to false if you want only one accordion to open
+        multiExpand={true}
         SummaryComponent={SummaryComponent}
         DetailComponent={DetailComponent}
       />
