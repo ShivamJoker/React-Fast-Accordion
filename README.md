@@ -9,7 +9,7 @@ Dynamic, fast, accessible & zero dependency accordion for React
 
 - Instead of adding event listener on all the items, it only adds to the container.
 - It has zero dependency, the animations are done using web animation API
-- Content component dynamically gets added to the DOM
+- Detail component dynamically gets added to the DOM
 
 ## Demo
 
