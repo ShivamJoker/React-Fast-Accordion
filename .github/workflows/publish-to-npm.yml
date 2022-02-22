@@ -24,8 +24,7 @@ jobs:
             git config user.name github-actions
             git config user.email github-actions@github.com
      
-      - run: yarn install
-      - run: git status
+      - run: yarn install --frozen-lockfile
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
