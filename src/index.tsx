@@ -24,9 +24,13 @@ const Accordion = ({ items, ...rest }: AccorionProps) => {
   const listContainerRef = useRef<HTMLUListElement>(null);
 
   const mutationCb: MutationCallback = (list) => {
-    const contentItem = (list[0].addedNodes[0] as HTMLElement) ?? null;
+    // this will get us the 2nd child (detail component)
+    const contentItem = (list[0].target.childNodes[1] as HTMLElement) ?? null;
 
     if (!contentItem) return;
+    // only animate the content item class
+    if (contentItem.className !== "acc-content") return;
+
     const scrollHeight = contentItem.scrollHeight;
 
     contentItem.animate(
@@ -39,7 +43,7 @@ const Accordion = ({ items, ...rest }: AccorionProps) => {
 
   useEffect(() => {
     if (!listContainerRef.current) return;
-
+    // start the observer
     observer.observe(listContainerRef.current, {
       childList: true,
       subtree: true,
