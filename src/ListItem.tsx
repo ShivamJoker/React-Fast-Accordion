@@ -14,10 +14,17 @@ const ListItem = ({
   ...rest
 }: ListItemProps) => {
   return (
-    <li id={id.toString()} className="acc-item">
+    <li
+      role="button"
+      tabIndex={0}
+      aria-expanded={isOpen}
+      aria-controls={`acc-content-${id}`}
+      id={id.toString()}
+      className="acc-item"
+    >
       <SummaryComponent {...rest} isOpen={isOpen} />
       {isOpen && (
-        <div className="acc-content" id={`acc-content-${id}`}>
+        <div role="definition" className="acc-content" id={`acc-content-${id}`}>
           <DetailComponent {...rest} isOpen={isOpen} />
         </div>
       )}

@@ -1,4 +1,10 @@
-import React, { MouseEvent, useEffect, useRef, useState } from "react";
+import React, {
+  KeyboardEvent,
+  MouseEvent,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import ListItem from "./ListItem";
 import "./style.css";
 
@@ -40,7 +46,7 @@ const Accordion = ({ items, ...rest }: AccorionProps) => {
     });
   }, []);
 
-  const clickHandler = (e: MouseEvent): void => {
+  const clickHandler = (e: MouseEvent | KeyboardEvent): void => {
     let element = e.target as HTMLElement;
 
     if (element.parentElement?.tagName === "LI") {
@@ -74,10 +80,22 @@ const Accordion = ({ items, ...rest }: AccorionProps) => {
     setOpened((prv) => ({ ...prv, [id]: true }));
   };
 
+  const ariaHandler = (e: KeyboardEvent) => {
+    if (e.key === " " || e.key === "Enter") {
+      clickHandler(e);
+      e.preventDefault();
+    }
+  };
+
   return (
-    <ul onClick={clickHandler} ref={listContainerRef}>
+    <ul
+      onClick={clickHandler}
+      onKeyPress={ariaHandler}
+      ref={listContainerRef}
+      role="list"
+    >
       {items.map(({ id, ...data }) => (
-        <ListItem id={id} {...data} key={id} isOpen={opened[id]} {...rest} />
+        <ListItem id={id} key={id} isOpen={opened[id]} {...data} {...rest} />
       ))}
     </ul>
   );
