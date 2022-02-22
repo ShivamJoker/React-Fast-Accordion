@@ -5,6 +5,7 @@ on:
       - "main"
     paths:
       - "src/**"
+      - ".github/**"
 jobs:
   build:
     runs-on: ubuntu-latest
