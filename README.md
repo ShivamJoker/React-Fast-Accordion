@@ -43,8 +43,7 @@ Install with yarn
 ```ts
 import React from "react";
 import { faker } from "@faker-js/faker";
-import "./app.css";
-import Accordion from "../src";
+import Accordion from "react-fast-accordion";
 
 // Your list - array of objects, id is required
 const data = Array.from({ length: 200 }, () => {
