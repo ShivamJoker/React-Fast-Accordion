@@ -90,3 +90,12 @@ const App = () => {
   );
 };
 ```
+
+## Accordion props
+
+| Parameter         | Type                          | Description                      | Required
+| :---------------- | :---------------------------- | :------------------------------- | :-------|
+| `items`           | `Array<{id: string, ...}>`    | List which you want to render    | Yes  ✅ |
+| `SummaryComponent`| `React.Element`               | Component for rendering summary  | Yes  ✅ |
+| `DetailComponent` | `React.Element`               | Component shown on expanding     | Yes  ✅ |
+| `multiExpand`     | `boolean` **`default:false`** | Expand only one at a time        | No.  ❌ |
