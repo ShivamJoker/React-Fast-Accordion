@@ -13,15 +13,10 @@ Dynamic, fast, accessible & zero dependency accordion for React
 
 ## Demo
 
-![Screen recording demo](https://user-images.githubusercontent.com/23727670/154848343-352c6833-192c-46de-b0d5-b986ba4ef53a.gif)
+![Screen recording of accordion](https://user-images.githubusercontent.com/23727670/155312319-7ebafee5-e532-43c6-821a-52dc5d753cd3.gif)
+
 
 [![Edit React fast accordion demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/festive-yalow-fm0hkf?fontsize=14&hidenavigation=1&theme=dark&view=preview)
-
-## Accessibility Demo (Sound on)
-
-
-https://user-images.githubusercontent.com/23727670/155070824-02f3c990-8f49-4aa2-bddb-e9366fd99637.mov
-
 
 
 ## Installation
