@@ -18,6 +18,9 @@ Dynamic, fast, accessible & zero dependency accordion for React
 
 [![Edit React fast accordion demo](https://codesandbox.io/static/img/play-codesandbox.svg)](https://codesandbox.io/s/festive-yalow-fm0hkf?fontsize=14&hidenavigation=1&theme=dark&view=preview)
 
+## Video tutorial
+[![Accordion tutorial-5](https://user-images.githubusercontent.com/23727670/155474669-91e23e2f-98e2-4776-9a3b-7b86d72e77fe.jpg)](https://youtu.be/Ey96fsnqaEc)
+
 
 ## Installation
 
