@@ -40,15 +40,18 @@ const Accordion = ({ items, multiExpand = true, ...rest }: AccorionProps) => {
     );
   };
 
-  const observer = new MutationObserver(mutationCb);
-
   useEffect(() => {
     if (!listContainerRef.current) return;
     // start the observer
+    const observer = new MutationObserver(mutationCb);
     observer.observe(listContainerRef.current, {
       childList: true,
       subtree: true,
     });
+
+    return () => {
+      observer.disconnect();
+    };
   }, []);
 
   const closeAccordion = (id: string) => {
@@ -62,6 +65,8 @@ const Accordion = ({ items, multiExpand = true, ...rest }: AccorionProps) => {
         { duration: 100, easing: "ease-out" }
       )
       .finished.then(() => {
+        contentItem.style.display = "none";
+
         setOpened((prv) => {
           // make a new copy and delete the id from obj
           // after animation is finished
@@ -85,7 +90,7 @@ const Accordion = ({ items, multiExpand = true, ...rest }: AccorionProps) => {
 
     if (!id) return;
 
-    const isOpen = !!opened[id];
+    const isOpen = opened[id];
 
     if (isOpen) {
       return closeAccordion(id);
